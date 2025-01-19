@@ -1,0 +1,14 @@
+1.SELECT Name FROM Employees WHERE HireDate>ISO Date("2021-01-01")
+
+2.SELECT DepartmentID,AVG(Salary) FROM Employees GROUPBY DepartmentID
+
+3.SELECT DepartmentName FROM Departments 
+WHERE DepartmentId=(SELECT DepartmentID FROM Employees GROUPBY DepartmentId HAVING SUM(Salary)=(SELECT MAX(SUM(Salary)) from Employees GROUPBY DepartmentId))
+
+4.
+SELECT DepartmentName FROM Departments WHERE DepartmentId NOT IN (SELECT DepartmentID FROM Employees)
+
+5.SELECT EmployeeID, Name, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments 
+    ON Employees.DepartmentID = Departments.DepartmentID;
