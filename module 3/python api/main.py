@@ -6,6 +6,16 @@ app = Flask(__name__)
 def get_db_connection():
     conn = sqlite3.connect('books.db')
     conn.row_factory = sqlite3.Row
+    with conn:
+        conn.execute('''
+        CREATE TABLE IF NOT EXISTS books (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            author TEXT NOT NULL,
+            published_year INTEGER,
+            genre TEXT
+        )
+        ''')
     return conn
 
 @app.route('/books', methods=['POST'])
